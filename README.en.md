@@ -71,6 +71,10 @@ the author, plus 112 public synthetic cases.
   (weighted F1 7% vs 72% comes from a single heavily weighted case). Synthetic: 63% vs 77%. The rule stays the
   default. If you use the LLM, use Sonnet (about $8 per 1,000 turns, ~3 s on the turns it is called); Haiku
   stopped needlessly on 6.4% of all turns.
+- The judges themselves were tested with injected failures of known answer: removing the check from verified
+  cases, the rule caught 7 of 23 and Sonnet all 23. Judged five times, done verdicts were the same on 99% of cases,
+  while ask verdicts flipped on nearly half of the positives.
+- Decisions and the options turned down are in [docs/adr/](docs/adr/) (Japanese).
 - Three measuring bugs were found and fixed on the way; one (commands cut at 160 characters before judging)
   had made 7 of 9 inspected reference labels wrong.
 
