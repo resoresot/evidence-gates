@@ -6,6 +6,19 @@ sw = load("shell_writes")
 
 
 class ShellWrites(unittest.TestCase):
+    def test_relative_writes_count_even_when_the_project_lives_under_tmp(self):
+        # regression: a fresh clone under /tmp made every relative write look like scratch (19 tests failed)
+        import os
+        import tempfile
+        here = os.getcwd()
+        os.chdir(tempfile.mkdtemp())
+        try:
+            self.assertTrue(sw.command_writes("printf x > a.py"))
+            self.assertEqual(sw.written_paths("printf x > a.py"), ["a.py"])
+            self.assertFalse(sw.command_writes("printf x > /tmp/scratch.txt"))
+        finally:
+            os.chdir(here)
+
     def test_writes(self):
         for cmd in (
             "printf hi > out.txt", "echo a >> notes.md", "ls | tee list.txt", "sed -i '' s/a/b/ f.py",

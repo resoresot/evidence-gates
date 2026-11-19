@@ -36,7 +36,12 @@ _REDIRECTS = {">", ">>", ">|", "&>", "&>>"}
 def _is_scratch(path: str) -> bool:
     if not path or path == "/dev/null" or path.startswith("&"):
         return True
-    real = os.path.realpath(os.path.expanduser(path))
+    expanded = os.path.expanduser(path)
+    if not os.path.isabs(expanded):
+        # a relative path is the project's file, wherever the project happens to live (a clone under
+        # /tmp included); only paths written out as scratch locations are scratch
+        return False
+    real = os.path.realpath(expanded)
     return any(real == r or real.startswith(r + "/") for r in SCRATCH_ROOTS)
 
 
