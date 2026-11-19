@@ -97,6 +97,9 @@ gates, which `shell_writes.py` now covers.
 - The gates stop an agent's slips, not a malicious agent. It can edit `.claude/test_gate.json`, and writing
   "unverified" passes the done check; the latter is a deliberate escape hatch for honest reporting.
 - `test_gate` runs a shell command stored in the repository. Do not enable it for untrusted repositories.
+- `test_gate` only checks that the tests pass, so an agent can also pass it by changing what a test expects (seen
+  in an end-to-end run, where it was the right fix for a spec change). Whether a test change is legitimate needs a
+  human look at the diff.
 - The ask check pushes toward fewer needless questions. For business agents built around approvals and
   permissions, a missed question costs more; use the categories the other way round there (always ask).
 
