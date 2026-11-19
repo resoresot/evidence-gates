@@ -1,0 +1,3 @@
+#!/bin/sh
+# On the Bash tool's PATH while the plugin is enabled: `eg-lessons add --when ... --do ... --why ...`
+exec python3 "$(dirname "$0")/../gates/lessons.py" "$@"

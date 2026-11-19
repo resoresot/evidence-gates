@@ -1,0 +1,10 @@
+{
+  "name": "evidence-gates",
+  "displayName": "Evidence Gates",
+  "version": "0.1.0",
+  "description": "Hooks that make a coding agent finish on evidence: no 'done' without a check after the last edit, no stopping while tests fail, no needless permission questions, plus a lessons loop that turns repeated mistakes into gates.",
+  "author": { "name": "resoresot" },
+  "repository": "https://github.com/resoresot/evidence-gates",
+  "license": "MIT",
+  "keywords": ["hooks", "guardrails", "verification", "agents", "evals"]
+}
